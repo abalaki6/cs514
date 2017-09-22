@@ -1,3 +1,10 @@
+/**
+ * CS514
+ * Project 1
+ * Mood disorders
+ * @author Wolf
+ */
+
 ;template for disorder
 (deftemplate Disorder (declare (ordered TRUE)))
 
@@ -9,10 +16,10 @@
 
 ;template for the period of the depression
 ;measures in weeks
-(deftemplate Time (slot duration (type integer) (default 0) ) )
+(deftemplate Time (slot duration (type float) (default 0) ) )
 
 ;template for the age of the patient
-(deftemplate Age (slot years (type float) (default 0) ))
+(deftemplate Age (slot years (type integer) (default 0) ))
 
 ;template for counter of symptoms, if required number achieved has to fire fact about possibility of disease
 (deftemplate TotalNumberDiseaseSymptoms (slot name) (slot count (type integer) (default 0) ) (slot requires (type integer) ) )
@@ -37,14 +44,14 @@
 "Add to KB Child if patient's age is below 20"
     (Age {years < 20})
     =>
-    (assert Child)
+    (assert (Child))
 )
 
 (defrule isAdult
 "Add to KB Adult of patient's age is 20 and above"
     (Age {years >= 20})
     =>
-    (assert Adult)
+    (assert (Adult))
 )
 
 ;;;;;;;;;;;
@@ -58,7 +65,7 @@
     (Symptom (name "_symptom_social_functioning") (dueDrugs FALSE))
     (not (Symptom (name "_symptom_suicidal")))
     =>
-    (assert Disorder "Major Depressive Disorder")
+    (assert (Disorder "Major Depressive Disorder") )
  )
 
 (defrule isMixedEpisode
@@ -71,7 +78,7 @@
     (Symptom (name "_symptom_excessive_activities_painful") (dueDrugs FALSE))
     (Time {duration >= 1})
     =>
-    (assert Disorder "Mixed Episode")
+    (assert (Disorder "Mixed Episode") )
 )
 
 (defrule isManicEpisode
@@ -80,7 +87,7 @@
     (not (Disorder "Mixed Episode") )
     (Time {duration >= 1} )
     =>
-    (assert Disorder "Manic Episode")
+    (assert (Disorder "Manic Episode") )
 )
 
 (defrule isHypomanicEpisode
@@ -90,7 +97,7 @@
     (Symptom (name "_symptom_changes_in_personality") (dueDrugs FALSE) )
     (Time {duration >= 0.5})
     =>
-    (assert Disorder "Hypomanic Episode")
+    (assert (Disorder "Hypomanic Episode") )
 )
 
 (defrule isCyclothymicDisorder
@@ -113,7 +120,7 @@
     (not (Disorder "Mixed Episode") )
     (not (Symptom (name "_symptom_schizophrenia") ) )
     =>
-    (assert Disorder "Cyclothymic Disorder")
+    (assert (Disorder "Cyclothymic Disorder") )
 )
 
 
@@ -140,8 +147,17 @@
         )
     )
     =>
-    (assert Disorder "Dysthymic Disorder")
+    (assert (Disorder "Dysthymic Disorder") )
 )
+
+
+;we can not have Manic and Hypomanic at the same time
+ (defrule notManicAndHypomanic
+    ?d <- (Disorder "Manic Episode")
+    (Disorder "Hypomanic Episide")
+    =>
+    (retract ?d)
+ )
 
 ;;;;
 ;Bipolar classification
@@ -152,7 +168,7 @@
     (not (Disorder "Major Depressive Disorder") )
     (not (Symptom (name "_symptom_schizophrenia") (dueDrugs FALSE) ) )
     =>
-    (assert Bipolar "Bipolar I Disorder, single Manic Episode")
+    (assert (Bipolar "Bipolar I Disorder, single Manic Episode") )
 )
 
 (defrule isBipolarIDisorderRecentHypomanic
@@ -160,28 +176,28 @@
     (Symptom (name "_symptom_social_functioning") (dueDrugs FALSE) )
     (not (Symptom (name "_symptom_schizophrenia") (dueDrugs FALSE) ) )
     =>
-    (assert Bipolar "Bipolar I Disorder, most recent Episode Hypomanic")
+    (assert (Bipolar "Bipolar I Disorder, most recent Episode Hypomanic"))
 )
 
 (defrule isBipolarIDisorderRecentManic
     (Disorder "Manic Episode")
     (not (Symptom( name "_symptom_schizophrenia") (dueDrugs FALSE) ) )
     =>
-    (assert Bipolar "Bipolar I Disorder, most recent Episode Manic")
+    (assert (Bipolar "Bipolar I Disorder, most recent Episode Manic") )
 )
 
 (defrule isBipolarIDisorderRecentMixed
     (Disorder "Mixed Episode")
     (not (Symptom (name "_symptom_schizophrenia") (dueDrugs FALSE) ) )
     =>
-    (assert Bipolar "Bipolar I Disorder, most recent Episode Mixed")
+    (assert (Bipolar "Bipolar I Disorder, most recent Episode Mixed") )
 )
 
 (defrule isBipolarIDisorderRecentDepressed
     (Disorder "Major Depressive Episode")
     (not (Symptom (name "_symptom_schizophrenia") (dueDrugs FALSE) ) )
     =>
-    (assert Bipolar "Bipolar I Disorder, most recent Episode Depressed")
+    (assert (Bipolar "Bipolar I Disorder, most recent Episode Depressed") )
 )
 
 (defrule isBipolarIDisorderUnspecified
@@ -201,7 +217,7 @@
     (Symptom (name "_symptom_social_functioning") (dueDrugs FALSE) )
     (Symptom (name "_symptom_schizophrenia") (dueDrugs FALSE) )
     =>
-    (assert Bipolar "Bipolar I Disorder, most recent Episode Unspecified")
+    (assert (Bipolar "Bipolar I Disorder, most recent Episode Unspecified") )
 )
 
 (defrule isBipolarIIDisorder
@@ -209,7 +225,14 @@
     (not (Symptom (name "_symptom_schizophrenia") (dueDrugs FALSE) ) )
     (Symptom (name "_symptom_social_functioning") (dueDrugs FALSE) )
     =>
-    (assert Bipolar "Bipolar II Disorder")
+    (assert (Bipolar "Bipolar II Disorder") )
+)
+
+(defrule NotBiPolarAndDisorder
+    ?d <- (Disorder ?q)
+    (Bipolar ?b)
+    =>
+    (retract ?d)
 )
 
 
@@ -315,15 +338,6 @@
     (modify ?s(wasUsed TRUE))
     (modify ?d(count (+ ?d.count 1)))
     (modify ?d2(count (+ ?d2.count 1)))
-)
-
-;rule 11
-(defrule has_symptom_irritable_mood
-    ?s <-(Symptom (name "_symptom_irritable_mood") (dueDrugs FALSE) (wasUsed FALSE))
-    ;?d <-(TotalNumberDiseaseSymptoms (name "_symptoms_major_depressive_disorder"))
-    =>
-    (modify ?s(wasUsed TRUE))
-    ;(modify ?d(count (+ ?d.count 1)))
 )
 
 ;rule 12

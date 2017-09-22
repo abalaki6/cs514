@@ -1,0 +1,89 @@
+How old is the patient?
+75
+For how long does patient have mood change or depression presents?
+(print #weeks, if less than one then decimal value s.t. 4 days = 0.5. If more than 1 year 52, if 2 years 104)
+1
+Does patient have depressed mood most of the day, nearly every day, as indicated by either subjective report (e.g., feels sad or empty) or observation made by others (e.g., appears tearful)? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient show markedly diminished interest or pleasure in all, or almost all, activities most of the day, nearly every day (as indicated by either subjective account or observation made by others)? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient show significant weight loss when not dieting or weight gain (e.g., a change of more than 5% of body weight in a month), or decrease or increase in appetite nearly every day? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient have insomnia or hypersomnia nearly every day? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient show psychomotor agitation or retardation nearly every day (observable by others, not merely subjective feelings of restlessness or being slowed down)? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient fatigue or loss of energy nearly every day? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient have feelings of worthlessness or excessive or inappropriate guilt (which may be delusional) nearly every day (not merely self-reproach or guilt about being sick)? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient show diminished ability to think or concentrate, or indecisiveness, nearly every day (either by subjective account or as observed by others)? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+Does patient show recurrent thoughts of death (not just fear of dying), recurrent suicidal ideation without a specific plan, or a suicide attempt or a specific plan for committing suicide? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+y
+Does patient show infalted self-esteem or grandiosity? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+Does patient show decreased need for sleep (e.g., feels rested after only 3 hours of sleep)? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Is patient indicated more talkative than usual or pressured to keep talking? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+Does patient indicate that their experience flight of ideas or subjective experience that thoughts are racing? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+Does patient show distractibility (i.e. attention too easily drawn to unimportant or irrelevant external stimuli)? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+is patient showed an increase in goal-directed activity (either socially, at work or school, or sexually) or phychomotor agitation? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+Does patient show excessive involvement in pleasurable activities that have a high potential for painful consequences (e.g., engaging in unrestrained buying sprees, sexual indiscretions, or foolish business investments)? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+Has patient indicated poor appetite? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient show low self-esteem? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Does patient show significant distress or impairment in social, occupational, or other important areas of functioning? (y/n)
+n
+Could it be caused by medicine patient takes? (y/n)
+
+Have people close to patient indicated that patient's personality have changed recently? (y/n)
+y
+Could it be caused by medicine patient takes? (y/n)
+n
+Have patient suffered or is suffering from schizophrenia? (y/n)
+
+Could it be caused by medicine patient takes? (y/n)
+
